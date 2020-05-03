@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    title Crypto
+    style(type="text/css")
+      include ./style.css
+  body
+    div.columns
+      div#browser.column
+        h3 Browser
+        div
+          include ./encrypt-form.pug
+        hr
+        div
+          include ./decrypt-form.pug
+      div#server.column
+        h3 Server
+        div
+          include ./encrypt-form.pug
+        hr
+        div
+          include ./decrypt-form.pug
+    div.errors
+    script
+      include ./index.js
+

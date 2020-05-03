@@ -1,0 +1,22 @@
+form input[type="text"], form textarea {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  margin-bottom: 1em; }
+
+.columns {
+  display: flex; }
+  .columns .column {
+    align-items: flex-start;
+    padding: 0 .5em;
+    width: calc(100% - 1em - 2px); }
+    .columns .column:not(:last-child) {
+      border-right: 2px solid black; }
+
+.errors {
+  margin-top: 1em; }
+  .errors .error {
+    padding: 1em;
+    background-color: lightgray;
+    border: 1px solid black;
+    margin: .5em 0; }
