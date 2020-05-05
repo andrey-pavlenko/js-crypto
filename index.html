@@ -108,7 +108,7 @@
    * @param {string} text 
    * @param {CryptoKey} key 
    * @param {string} iv
-   * @returns {ArrayBuffer}
+   * @returns {Promise<ArrayBuffer>}
    */
   async function encrypt(text, key, iv) {
     const textBytes = new TextEncoder().encode(text);
@@ -131,7 +131,7 @@
    * @param {ArrayBuffer} array 
    * @param {CryptoKey} key 
    * @param {string} iv 
-   * @returns {ArrayBuffer}
+   * @returns {Promise<ArrayBuffer>}
    */
   async function decrypt(array, key, iv) {
     const ivBytes = new Uint8Array(16);
@@ -151,16 +151,29 @@
 
   /**
    * @param {string} password 
-   * @returns {CryptoKey}
+   * @returns {Promise<CryptoKey>}
    */
   async function makeKey(password) {
     return await window.crypto.subtle.importKey(
       'raw',
-      setArrayString(new Uint8Array(32), password),
+      //setArrayString(new Uint8Array(32), password),
+      await makeSha256(password),
       'AES-CBC',
       true, ['encrypt', 'decrypt']
     );
   }
+
+  /**
+   * @param {string} string 
+   * @returns {Promise<ArrayBuffer>}
+   */
+  async function makeSha256(string) {
+    const strUint8 = new TextEncoder().encode(string);
+    const hash = await crypto.subtle.digest('SHA-256', strUint8);
+    return hash;
+  }
+
+  window.makeSha256 = makeSha256;
 
   // === DOM ============
 
