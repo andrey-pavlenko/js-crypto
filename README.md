@@ -12,23 +12,11 @@
 
 IV &ndash; 16 байт.
 
-В демо ключ и IV генерируются путем наложения на пустой массив байт цифровых значений введенных символов.
+Сейчас ключ получается из строки с помощью [SubtleCrypto.digest()](https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto/digest)
 
-Наложение слова &laquo;password&raquo; на массив заполненный нулями:
-
-| 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 |10 |11 |12 |13 |14 |15 | 
-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
-|p  |a  |s  | s | w | o | r | d |00 |00 |00 |00 |00 |00 |00 |00 |
-|112|97 |115|115|119|111|114|100|00 |00 |00 |00 |00 |00 |00 |00 |
-
+*Для тестирования:*  
+**Browser** &ndash; шифрование/расшифровка в браузере.  
+**Server** &ndash; шифрование/расшифровка в на сервере.
 
 Код агентства &ndash; 32 символа. Это hex-строка которая состоит из 16 байт.
-
-Файл [nodejs-crypto.js](https://github.com/andrey-pavlenko/js-crypto/blob/master/nodejs-crypto.js) &ndash; расшифровка в среде Node.js.
-
-Online-расшифровщики тоже расшифровывают, только нужен ключ из 32 байт (символов) и чтобы зашифрованный текст можно было ввести в base64. Например:   
-https://www.devglan.com/online-tools/aes-encryption-decryption  
-https://encode-decode.com/aes256-encrypt-online/
-
-[CryptoJS](https://cryptojs.gitbook.io/docs/#ciphers) использует passphrase как ключ. Эту passphrase он превращает в 32-байтный ключ с помощью какого-то hash алгоритма.
 
